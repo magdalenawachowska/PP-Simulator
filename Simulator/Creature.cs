@@ -72,4 +72,23 @@ public class Creature
 
         level = Level >= 10 ? Level : Level + 1;    
     }
+
+    public void Go(Direction direction)
+    {
+        Console.WriteLine($"{Name} goes {direction.ToString().ToLower()}");
+    }
+
+    public void Go(Direction[] directions)
+    {
+        foreach (Direction direction in directions)
+        {
+            Go(direction);
+        }
+    }
+
+    public void Go(string expr)
+    {
+        Direction[] exprs = DirectionParser.Parse(expr);
+        Go(exprs);
+    }
 }
