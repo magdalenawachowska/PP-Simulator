@@ -13,15 +13,9 @@ public class Orc : Creature
     private int hunt_count = 0;
 
     public int Rage
-    { get => rage;
-      init
-      {
-          if (value < 0)
-              value = 0;
-          else if (value > 10)
-              value = 10;
-          rage = value;
-      }
+    {
+       get => rage;
+       set => rage = Validator.Limiter(value, 0, 10);
     }
     public void Hunt()
     {
@@ -32,7 +26,7 @@ public class Orc : Creature
 
         Console.WriteLine($"{Name} is hunting.");
     }
-    public Orc() : base() { }          // : base("Unknown Orc", 10) => Rage = 6;     taka opcja tez xd    -pusty konstruktor bezparametrowy                                            // dlatego dodalismy tutaj xd
+    public Orc() : base() { }          //    -pusty konstruktor bezparametrowy                                
 
     public Orc(string name, int level = 1, int rage = 1) : base(name, level)       // po doklejeniu tego konstruktora "znika" bezparametrowy domyslny, dziedziczony z klasy bazowej
     {
@@ -42,5 +36,10 @@ public class Orc : Creature
     public override void SayHi() => Console.WriteLine($"Hi, I'm {Name}, my level is {Level}, my rage is {Rage}.");
 
     public override int Power => 7 * Level + 3 * Rage;
+
+    public override string Info                              
+    {
+        get { return $"{Name} [{Level}] [{Rage}]"; }
+    }
 
 }

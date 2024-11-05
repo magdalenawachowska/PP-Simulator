@@ -18,39 +18,13 @@ public abstract class Creature                   //uwaga dodalam abstract - nie 
     public string Name
     {
         get => name;
-        init                                      // init - uzywane zeby wartosc mogla byc nadana tylko raz przy inicjacji
-        {
-            name = value.Trim();                  // usuwa zbedne spacje
-            
-            if (name.Length <3)
-            {
-                name = name.PadRight(3, '#');
-            }
-            else if (name.Length >25)
-            {
-                name = name.Substring(0,25);
-                name = name.Trim();
-                if (name.Length < 3)
-                {
-                    name = name.PadRight(3, '#');
-                }
-            }
-            name = char.ToUpper(name[0]) + name.Substring(1);      // zamiana pierwszej litery na wielka
-        }
-    }                                             // property - uzywane potem w konstruktorze !
+        set => name = Validator.Shortener(value, 3, 25, '#');
+    }
 
-    public int Level                             // **int na uint- zeby nie bylo ujemnych
+    public int Level                          
     {
         get => level;
-        init
-        {
-            if (value < 1)
-                value = 1;
-            else if (value > 10)
-                value = 10;
-            level = value;
-        }
-                                                 
+        set => level = Validator.Limiter(value, 1, 10);                                          
     }   
 
     public Creature()                
@@ -62,12 +36,16 @@ public abstract class Creature                   //uwaga dodalam abstract - nie 
         Level = level; 
     }
 
-    public string Info                               // wlasciwosc do odczytu 
+    public abstract string Info { get; }                               // wlasciwosc do odczytu
+                                                                       //{
+                                                                      //get { return $"{Name} [{Level}]"; }
+                                                                      //}
+    public override string ToString()
     {
-        get { return $"{Name} [{Level}]"; }
+        return $"{GetType().Name.ToUpper()}: {Info}";
     }
 
-    public /*abstract*/ virtual void SayHi() => Console.WriteLine($"Hi, I'm {Name}, my level is {Level}");              //zastapilam virtual abstraktem
+    public abstract void SayHi(); // => Console.WriteLine($"Hi, I'm {Name}, my level is {Level}");              //zastapilam virtual abstraktem
 
     public void Upgrade()                
     {

@@ -1,4 +1,6 @@
-﻿namespace Simulator;
+﻿using System.ComponentModel;
+
+namespace Simulator;
 
 internal class Program
 {
@@ -35,30 +37,38 @@ internal class Program
             Console.WriteLine($"{creature.Name,-15}: {creature.Power}");
         }
     }
+    static void Lab4b()
+    {
+        object[] myObjects = {
+        new Animals() { Description = "dogs"},
+        new Birds { Description = "  eagles ", Size = 10 },
+        new Elf("e", 15, -3),
+        new Orc("morgash", 6, 4)
+    };
+        Console.WriteLine("\nMy objects:");
+        foreach (var o in myObjects) Console.WriteLine(o);
+        /*
+            My objects:
+            ANIMALS: Dogs <3>
+            BIRDS: Eagles (fly+) <10>
+            ELF: E## [10][0]
+            ORC: Morgash [6][4]
+        */
+    }
 
     static void Main(string[] args)
     {
         Console.WriteLine("Starting Simulator! \n");
 
         Lab4a();
-      
-
-        
+        Lab4b();
+        Console.WriteLine();
 
         /*
-        ((Elf)e).Sing();                  // rzutowanie - tworzac elfa z creature nie mamy dostepu do metod z klasy elfy xd - jawna konwersja typow
-
-        //((Elf)o).Sing();               // uwaga na cos takiego! kompilator nie da rady tego sprawdzic, moze sie wysypac potem- runtime error
-
-        (o as Elf)?.Sing();           // bezpieczne wyjscie - jesli orch nie jest elfem to wyrazenie bedzie nullem i nic sie nie wydarzy
-
-        if (o is Elf) (o as Elf)?.Sing();               // jesli nie jest elfem to robi nulla i nie idzie dalej, nie skompiluje sie bo bedziemy po ifie
-        else Console.WriteLine($"{o.Name} is not Elf!");
-
-        if (o is Elf elf) elf.Sing();               // 
-        else Console.WriteLine($"{o.Name} is not Elf!");
+        Creature c = new Elf("Elandor", 5, 3);
+        Console.WriteLine("Sprawdzam override \n");
+        Console.WriteLine(c);  // ELF: Elandor [5]
         */
-        
 
     }
 
