@@ -1,8 +1,11 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
+using System.Numerics;
+using System.Security.Cryptography;
 
 namespace Simulator;
 
-internal class Program
+internal class Program               
 {
 
     static void Lab4a()
@@ -56,19 +59,71 @@ internal class Program
         */
     }
 
+    static void Lab5a()
+    {
+        Console.WriteLine("Rectangles test \n");
+
+        Point p1 = new(1, 2);
+        Point p2 = new(6, 7);
+      
+        Rectangle rec1 = new(p1, p2);                                               //poprawnie zbudowany prostokat z punktow
+
+        Point p3 = new(10, 12);
+        Point p4 = new(4, 6); 
+
+        Rectangle rec2 = new(p3, p2);                                               // prostokat zbudowany z punktow podanych na odwrot 
+
+        Point p5 = new(5, 7);
+        try
+        {
+            Console.WriteLine($"Prostokat zbudowany z punktow współliniowych:");
+            Rectangle rec3 = new(p5, p2);                                          // prostokat zbudowany z punktow współliniowych
+
+            Console.WriteLine(rec3);
+        }
+        catch (Exception ex)
+        {
+            Console.Write(ex.Message);
+        }
+        finally
+        {
+            Console.WriteLine("Sprawdzono prostokąt o punktach współliniowych.\n");
+        }
+         
+        Rectangle rec4 = new(3, 1, 9, 7);                                         // prostokat zbudowany poprawnie z wspolrzednych
+        Rectangle rec5 = new(10, 10, 1, 1);
+
+        Console.WriteLine($"Prostokąt zbudowany z prawidłowych punktów: {rec1}");
+        Console.WriteLine($"Prostokat zbudowany z punktow podanych na odwrót {rec2}");
+        
+        Console.WriteLine($"Prostokat zbudowany poprawnie z współrzędnych: {rec4}");
+        Console.WriteLine($"Prostokat zbudowany z współrzędnych podanych na odwrót: {rec5}");
+
+        try
+        {
+            Console.WriteLine($"\nProstokat zbudowany z współrzędnych współliniowych:");
+            Rectangle rec6 = new(2, 2, 2, 6);
+
+            Console.WriteLine(rec6);
+        }
+        catch (Exception ex)
+        {
+            Console.Write(ex.Message);
+        }
+        finally
+        {
+            Console.WriteLine("Sprawdzono prostokąt o współrzędnych współliniowych.\n");
+        }
+
+        Console.WriteLine($"\nSprawdzam zawieranie się w prostokącie {rec4}:\n punktu {p3}: {rec4.Contains(p3)}\n punktu {p4}: {rec4.Contains(p4)}");
+        
+    }
+
     static void Main(string[] args)
     {
         Console.WriteLine("Starting Simulator! \n");
 
-        Lab4a();
-        Lab4b();
-        Console.WriteLine();
-
-        /*
-        Creature c = new Elf("Elandor", 5, 3);
-        Console.WriteLine("Sprawdzam override \n");
-        Console.WriteLine(c);  // ELF: Elandor [5]
-        */
+        Lab5a();
 
     }
 
@@ -126,4 +181,9 @@ static void Lab3b()
     c.Go("xxxdR lyyLTyu");
 } */
 
+
+    // exception- klasa bazowa dla wszystkich bledow- zawiera informacje o bledzie, potem dajemy nazwe zmiennej, przed dajemy catch -- catch (Exception excpt) 
+    // blok finally - wykonuje sie zawsze, niezaleznie od bledu , mozna pominac tez catcha xd ale po co..
+    // throw exception
+    // try { throw ...Exception ("....")   }
 }
