@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Simulator.Maps;
+using System;
 using System.ComponentModel;
 using System.Numerics;
 using System.Security.Cryptography;
@@ -119,11 +120,50 @@ internal class Program
         
     }
 
+    static void Lab5b()
+    {
+        Console.WriteLine("SmallSquareMap test \n");
+
+        int size = 7;
+        SmallSquareMap map1 = new (size);
+
+        Point p1 = new(2, 2);
+        Point p2 = new(-2, -2);
+
+        Console.WriteLine($"Sprawdzam, czy punkt {p2} należy do mapy: \n{map1.Exist(p2)}");
+
+        try
+        {
+            Console.WriteLine($"Punkt {p1} należący do mapy- kolejne przemieszczenia: \n");
+
+            p1 = map1.Next(p1, Direction.Up);
+            p1 = map1.NextDiagonal(p1, Direction.Up);
+            Console.WriteLine(p1);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+
+        try
+        {
+            SmallSquareMap map2 = new SmallSquareMap(1);
+            Console.WriteLine("Podano za mały rozmiar mapy.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+
+        
+    }
+
     static void Main(string[] args)
     {
         Console.WriteLine("Starting Simulator! \n");
 
-        Lab5a();
+        //Lab5a();
+        Lab5b();
 
     }
 
