@@ -24,7 +24,7 @@ public class Orc : Creature
         if (hunt_count % 2 == 0 && hunt_count != 0 && rage < 10)
             rage++;
 
-        Console.WriteLine($"{Name} is hunting.");
+       // Console.WriteLine($"{Name} is hunting.");
     }
     public Orc() : base() { }          //    -pusty konstruktor bezparametrowy                                
 
@@ -33,7 +33,7 @@ public class Orc : Creature
         Rage = rage;
     }
 
-    public override void SayHi() => Console.WriteLine($"Hi, I'm {Name}, my level is {Level}, my rage is {Rage}.");
+    public override string Greeting() => ($"Hi, I'm {Name}, my level is {Level}, my rage is {Rage}.");
 
     public override int Power => 7 * Level + 3 * Rage;
 

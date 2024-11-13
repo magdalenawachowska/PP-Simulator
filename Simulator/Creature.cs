@@ -45,7 +45,7 @@ public abstract class Creature                   //uwaga dodalam abstract - nie 
         return $"{GetType().Name.ToUpper()}: {Info}";
     }
 
-    public abstract void SayHi(); // => Console.WriteLine($"Hi, I'm {Name}, my level is {Level}");              //zastapilam virtual abstraktem
+    public abstract string Greeting(); // => Console.WriteLine($"Hi, I'm {Name}, my level is {Level}");              //zastapilam virtual abstraktem
 
     public void Upgrade()                
     {
@@ -54,24 +54,26 @@ public abstract class Creature                   //uwaga dodalam abstract - nie 
         level = Level >= 10 ? Level : Level + 1;    
     }
 
-    public void Go(Direction direction)
+    public string Go(Direction direction) => $"{direction.ToString().ToLower()}";
+    
+    public string[] Go(Direction[] directions)
     {
-        Console.WriteLine($"{Name} goes {direction.ToString().ToLower()}");
-    }
+        var result = new string[directions.Length];
 
-    public void Go(Direction[] directions)
-    {
-        foreach (Direction direction in directions)
+        for (int i = 0; i<directions.Length; i++)
         {
-            Go(direction);
+            result[i] = Go(directions[i]);
         }
+        
+        return result ;
     }
 
-    public void Go(string expr)
+    public string[] Go(string expr) => Go(DirectionParser.Parse(expr));
+    /*
     {
         Direction[] exprs = DirectionParser.Parse(expr);
         Go(exprs);
-    }
+    }*/
 
     public abstract int Power { get; }       // wlasciwosc do odczytu
     //{
