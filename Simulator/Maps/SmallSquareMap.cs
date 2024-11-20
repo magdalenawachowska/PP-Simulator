@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Simulator.Maps;
 
-public class SmallSquareMap : Map
-{ 
-    public readonly int Size;
+public abstract class SmallSquareMap : SmallMap
+{
+    /*public readonly int Size;
     
     public SmallSquareMap(int size)
     {
@@ -25,7 +25,12 @@ public class SmallSquareMap : Map
             return false;
         else
             return true;
+    }*/
+    public SmallSquareMap(int size) : base(size, size)
+    {
+
     }
+
 
     public override Point Next(Point p, Direction d)
     {

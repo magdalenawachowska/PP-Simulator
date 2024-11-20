@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Simulator.Maps;
 
-public class SmallTorusMap : Map
+public class SmallTorusMap : SmallMap
 {
-    public int Size { get;}
+    /*public int Size { get;}
 
     public override bool Exist(Point p)
     {
@@ -18,6 +18,13 @@ public class SmallTorusMap : Map
         else
             return true;
     }
+    */
+
+    public SmallTorusMap(int sizeX, sizeY) : base(sizeX, sizeY)
+    { 
+    
+    }
+
 
     public override Point Next(Point p, Direction d)
     {
@@ -68,10 +75,13 @@ public class SmallTorusMap : Map
         return p2;
     }
 
+
+    /*
     public SmallTorusMap(int size)
     {
         if (size < 5 || size > 20)
             throw new ArgumentOutOfRangeException("Size of the map is incorrect");
         Size = size;
     }
+    */
 }
