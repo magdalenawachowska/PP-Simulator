@@ -15,11 +15,12 @@ public class SmallSquareMapTests
     public void Constructor_ValidSquareMapSize_ShouldSetSize()
     {
         // Arrange
-        int size = 10;
-        // Act
-        var map = new SmallSquareMap(size);
+        int sizex = 10;
+
+       // Act
+        var map = new SmallSquareMap(sizex);
         // Assert
-        Assert.Equal(size, map.Size);
+        Assert.Equal(sizex, map.SizeX);
     }
 
     [Theory]

@@ -6,11 +6,13 @@ using System.Reflection.Emit;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using Simulator.Maps;
 
 namespace Simulator;
 
-public abstract class Creature                   //uwaga dodalam abstract - nie da sie stworzyc ogolnego stwora- innego niz elf czy ork
+public abstract class Creature                         //uwaga dodalam abstract - nie da sie stworzyc ogolnego stwora- innego niz elf czy ork
 {
+
     private string name = "Unknown";           // field
     private int level = 1;                    // field
     private int power;
@@ -18,14 +20,16 @@ public abstract class Creature                   //uwaga dodalam abstract - nie 
     public string Name
     {
         get => name;
-        set => name = Validator.Shortener(value, 3, 25, '#');
+        init => name = Validator.Shortener(value, 3, 25, '#');
     }
 
     public int Level                          
     {
         get => level;
-        set => level = Validator.Limiter(value, 1, 10);                                          
-    }   
+        init => level = Validator.Limiter(value, 1, 10);                                          
+    }
+
+    public abstract int Power { get; }       // wlasciwosc do odczytu
 
     public Creature()                
     {   }
@@ -54,8 +58,15 @@ public abstract class Creature                   //uwaga dodalam abstract - nie 
         level = Level >= 10 ? Level : Level + 1;    
     }
 
-    public string Go(Direction direction) => $"{direction.ToString().ToLower()}";
+    public string Go(Direction direction)
+    {
+
+        // ma uzyc regul mapy - przy pomocy metody next mapy sprawdzic jaki nastepny punkt, nie musimy sprawdzac czy exist bo mapa sama zwrocila istniejacy
+        // trzeba sprawdzic czy to nie jest ten na ktorym juz jestesmy tylko 
+        return $"{direction.ToString().ToLower()}";
+    }
     
+    // potem usuwac to hurtowe chodzenie  xdd ale tak schludnie to zrobic
     public string[] Go(Direction[] directions)
     {
         var result = new string[directions.Length];
@@ -68,19 +79,13 @@ public abstract class Creature                   //uwaga dodalam abstract - nie 
         return result ;
     }
 
-    public string[] Go(string expr) => Go(DirectionParser.Parse(expr));
+    //public string[] Go(string expr) => Go(DirectionParser.Parse(expr));
+             
     /*
     {
         Direction[] exprs = DirectionParser.Parse(expr);
         Go(exprs);
     }*/
-
-    public abstract int Power { get; }       // wlasciwosc do odczytu
-    //{
-      //  get => Power;
-    //}
-
-
 
     // przy abstrakcie nie mamy dozwolonej implementacji . abstract wymusza override'a
     // 

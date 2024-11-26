@@ -4,18 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Simulator.Maps;                   //potem trzeba bedzie importowac ta przestrzen nazw!
+namespace Simulator.Maps;                 
 
 /// <summary>
 /// Map of points.
 /// </summary>
 public abstract class Map
 {
-
     public int SizeX { get; }
     public int SizeY { get; }
 
-    private readonly Rectangle _map;//???\\
+    private readonly Rectangle _map;
 
 
     protected Map (int sizeX, int sizeY)
@@ -30,9 +29,8 @@ public abstract class Map
         }
         SizeX = sizeX;
         SizeY = sizeY;
-        _map = new Rectangle(0,0, SizeX -1, SizeY-1);
+        _map = new Rectangle(0,0, SizeX-1, SizeY-1);
     }
-
 
     /// <summary>
     /// Check if give point belongs to the map.

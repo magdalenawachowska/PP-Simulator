@@ -25,6 +25,7 @@ public class ValidatorTests
     [InlineData("Legolas", 3, 15, '#',"Legolas")]
     [InlineData("xd", 3, 15, '#', "Xd#")]
     [InlineData("mojeimie           jestzadlugie", 3,15, '#', "Mojeimie")]
+    [InlineData("", 3,15, '#', "###")]
     public void ShortenerShouldReturnValidString(string value, int min, int max, char placeholder, string expectedvalue)
     {
         //Arrange
