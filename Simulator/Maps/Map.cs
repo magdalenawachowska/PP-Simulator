@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,6 +32,15 @@ public abstract class Map
         SizeY = sizeY;
         _map = new Rectangle(0,0, SizeX-1, SizeY-1);
     }
+
+    public abstract void Add(Creature creature, Point position);                              //dodanie stwora na jakas pozycje
+    public abstract void Remove(Creature creature, Point position);                            //zabranie stwora z danego punktu
+
+    public abstract void Move(Creature creature, Point position1, Point position2);           // przeniesienie stwora miedzy dwoma punktami
+
+    public abstract List<Creature>? At(Point currentposition);                        //sprawdzenie jakie stwory sa w danym punkcie
+    //public List<Creature>? At( int x, int y) => At(new Point(x,y));
+    public abstract List<Creature> At(int x, int y);
 
     /// <summary>
     /// Check if give point belongs to the map.

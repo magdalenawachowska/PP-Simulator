@@ -12,6 +12,23 @@ namespace Simulator;
 
 public abstract class Creature                         //uwaga dodalam abstract - nie da sie stworzyc ogolnego stwora- innego niz elf czy ork
 {
+    public Map? Map { get; private set; }
+    public Point Position { get; private set; }
+
+    public void InitMapAndPosition(Map map, Point position)           //wybranie mapy dla stwora i ustawienie pozycji
+    {
+        if (Map != null)
+            throw new InvalidOperationException($"{Name} is currently on a map.");
+
+        if (!map.Exist(position))
+            throw new ArgumentException($"{position} is out of range of the map");
+
+
+        Map = map;
+        Position = position;
+
+        Map.Add(this, position);
+    }
 
     private string name = "Unknown";           // field
     private int level = 1;                    // field
@@ -58,16 +75,16 @@ public abstract class Creature                         //uwaga dodalam abstract 
         level = Level >= 10 ? Level : Level + 1;    
     }
 
-    public string Go(Direction direction)
+    /*public string Go(Direction direction)
     {
 
         // ma uzyc regul mapy - przy pomocy metody next mapy sprawdzic jaki nastepny punkt, nie musimy sprawdzac czy exist bo mapa sama zwrocila istniejacy
         // trzeba sprawdzic czy to nie jest ten na ktorym juz jestesmy tylko 
         return $"{direction.ToString().ToLower()}";
-    }
+    }*/
     
     // potem usuwac to hurtowe chodzenie  xdd ale tak schludnie to zrobic
-    public string[] Go(Direction[] directions)
+    /*public string[] Go(Direction[] directions)
     {
         var result = new string[directions.Length];
 
@@ -77,6 +94,19 @@ public abstract class Creature                         //uwaga dodalam abstract 
         }
         
         return result ;
+    }*/
+
+    public void Go(Direction directions)
+    {
+        if (Map != null)
+        {
+            Point newPosition = Map.Next(Position, directions);
+
+            Map.Move(this, Position, newPosition);
+            Position = newPosition;
+        }
+        else
+            throw new ArgumentNullException("Select a map");
     }
 
     //public string[] Go(string expr) => Go(DirectionParser.Parse(expr));
