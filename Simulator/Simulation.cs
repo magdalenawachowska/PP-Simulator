@@ -11,7 +11,8 @@ namespace Simulator;
 public class Simulation
 {
 
-    int i = 0;           //index of current creature move
+    int creatureIndex  = 0;           
+    int movesIndex = 0;
 
     /// <summary>
     /// Simulation's map.
@@ -45,12 +46,12 @@ public class Simulation
     /// <summary>
     /// Creature which will be moving current turn.
     /// </summary>
-    public Creature CurrentCreature { get => Creatures[i]; }
+    public Creature CurrentCreature { get => Creatures[creatureIndex]; }
 
     /// <summary>
     /// Lowercase name of direction which will be used in current turn.
     /// </summary>
-    public string CurrentMoveName { get => Moves[i].ToString().ToLower(); }
+    public string CurrentMoveName { get => Moves[movesIndex].ToString(); }        
 
     /// <summary>
     /// Simulation constructor.
@@ -78,7 +79,7 @@ public class Simulation
             Creatures[i].InitMapAndPosition(Map, Positions[i]);
         }
 
-        Moves = DirectionParser.Parse(moves).ToString();
+        Moves = moves;
     
     }
 
@@ -87,16 +88,44 @@ public class Simulation
 /// Throw error if simulation is finished.
 /// </summary>
     public void Turn()
-    {
-        for (int i = 0; i < Moves.Count(); i++)
+    { 
+        if (Finished)
+            throw new Exception("Simulation is finished");
+
+        string _moveName = " ";
+
+        switch (CurrentMoveName)
         {
-            CurrentCreature.Go(DirectionParser.Parse(CurrentMoveName)[0]);
+            case "u":
+                    _moveName = "Up";
+                break;
+            case "d":
+                _moveName = "Down";
+                break;
+            case "l":
+                _moveName = "Left";
+                break;
+            case "r":
+                _moveName = "Right";
+                break;
+
+            default: _moveName = CurrentMoveName; break;
         }
 
-        Finished = true;
+        Console.WriteLine($"{CurrentCreature.Name} goes {_moveName}");
 
-    if (Finished)
-        throw new Exception("Simulation is finished");
+        CurrentCreature.Go(DirectionParser.Parse(CurrentMoveName).First());
+
+        Console.WriteLine($"{CurrentCreature.Name} is at {CurrentCreature.Position}");
+        //Console.WriteLine(DirectionParser.Parse(CurrentMoveName).First());
+        creatureIndex++;
+        movesIndex++;
+        if (creatureIndex >= Creatures.Count())
+            creatureIndex = 0;
+
+        if (movesIndex >= Moves.Count())
+            Finished = true;
+    
 
     }
 

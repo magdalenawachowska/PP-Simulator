@@ -101,8 +101,10 @@ public abstract class Creature                         //uwaga dodalam abstract 
         if (Map != null)
         {
             Point newPosition = Map.Next(Position, directions);
+            //Console.WriteLine(newPosition.ToString());
 
             Map.Move(this, Position, newPosition);
+            
             Position = newPosition;
         }
         else

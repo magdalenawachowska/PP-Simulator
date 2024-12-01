@@ -33,7 +33,10 @@ public abstract class SmallMap : Map
 
     public override void Add(Creature creature, Point position)
     {
-        _fields[position.X, position.Y] = new List<Creature>();
+        if (_fields[position.X,position.Y] == null)
+        {
+            _fields[position.X, position.Y] = new List<Creature>();
+        }
         _fields[position.X, position.Y]?.Add(creature);
     }
 
@@ -45,6 +48,9 @@ public abstract class SmallMap : Map
     public override void Move(Creature creature, Point position1, Point position2)
     {
         _fields[position1.X, position1.Y]?.Remove(creature);
+        if (_fields[position2.X, position2.Y] == null)
+            _fields[position2.X, position2.Y] = new List<Creature>();
+
         _fields[position2.X, position2.Y]?.Add(creature);
     }
 
