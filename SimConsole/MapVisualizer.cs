@@ -19,9 +19,9 @@ public class MapVisualizer
         _map = map;
     }
 
-    public string CreatureIdentification(int x, int y)
+    public string MappableIdentification(int x, int y)
     {
-        List<Creature> found = _map.At(x, y);
+        List<IMappable> found = _map.At(x, y);
         if (found != null && found.Count() != 0)
         {
 
@@ -54,7 +54,7 @@ public class MapVisualizer
             for (int x = 0; x <= _map.SizeX - 1; x++)
             {
                 Console.Write(Box.Vertical);
-                Console.Write(CreatureIdentification(x,y));
+                Console.Write(MappableIdentification(x,y));
             }
             Console.Write(Box.Vertical);
             Console.WriteLine();

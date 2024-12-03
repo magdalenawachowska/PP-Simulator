@@ -10,7 +10,7 @@ namespace Simulator.Maps;
 public abstract class SmallMap : Map
 {
 
-    List<Creature>?[,] _fields;                  // tablica 2d, dopuszczamy nulla 
+    List<IMappable>?[,] _fields;                  // tablica 2d, dopuszczamy nulla 
 
 
 
@@ -27,39 +27,39 @@ public abstract class SmallMap : Map
         }
 
 
-        _fields = new List<Creature>?[sizeX, sizeY];
+        _fields = new List<IMappable>?[sizeX, sizeY];
 
     }
 
-    public override void Add(Creature creature, Point position)
+    public override void Add(IMappable mappable, Point position)
     {
         if (_fields[position.X,position.Y] == null)
         {
-            _fields[position.X, position.Y] = new List<Creature>();
+            _fields[position.X, position.Y] = new List<IMappable>();
         }
-        _fields[position.X, position.Y]?.Add(creature);
+        _fields[position.X, position.Y]?.Add(mappable);
     }
 
-    public override void Remove(Creature creature, Point position)
+    public override void Remove(IMappable mappable, Point position)
     {
-        _fields[position.X, position.Y]?.Remove(creature);
+        _fields[position.X, position.Y]?.Remove(mappable);
     }
 
-    public override void Move(Creature creature, Point position1, Point position2)
+    public override void Move(IMappable mappable, Point position1, Point position2)
     {
-        _fields[position1.X, position1.Y]?.Remove(creature);
+        _fields[position1.X, position1.Y]?.Remove(mappable);
         if (_fields[position2.X, position2.Y] == null)
-            _fields[position2.X, position2.Y] = new List<Creature>();
+            _fields[position2.X, position2.Y] = new List<IMappable>();
 
-        _fields[position2.X, position2.Y]?.Add(creature);
+        _fields[position2.X, position2.Y]?.Add(mappable);
     }
 
-    public override List<Creature>? At(Point currentposition)
+    public override List<IMappable>? At(Point currentposition)
     {
         return _fields[currentposition.X, currentposition.Y];
     }
 
-    public override List<Creature>? At(int x, int y)
+    public override List<IMappable>? At(int x, int y)
     {
         return _fields[x,y];
     }

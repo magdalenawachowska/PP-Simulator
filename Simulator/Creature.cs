@@ -10,7 +10,7 @@ using Simulator.Maps;
 
 namespace Simulator;
 
-public abstract class Creature                         //uwaga dodalam abstract - nie da sie stworzyc ogolnego stwora- innego niz elf czy ork
+public abstract class Creature : IMappable                       //uwaga dodalam abstract - nie da sie stworzyc ogolnego stwora- innego niz elf czy ork
 {
     public Map? Map { get; private set; }
     public Point Position { get; private set; }
