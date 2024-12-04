@@ -33,11 +33,11 @@ public abstract class SmallMap : Map
 
     public override void Add(IMappable mappable, Point position)
     {
-        if (_fields[position.X,position.Y] == null)
-        {
-            _fields[position.X, position.Y] = new List<IMappable>();
-        }
-        _fields[position.X, position.Y]?.Add(mappable);
+            if (_fields[position.X,position.Y] == null)
+            {
+                _fields[position.X, position.Y] = new List<IMappable>();
+            }
+            _fields[position.X, position.Y]?.Add(mappable);
     }
 
     public override void Remove(IMappable mappable, Point position)

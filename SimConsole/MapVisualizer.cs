@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using Simulator;
 using Simulator.Maps;
 
-
 namespace SimConsole;
 
 public class MapVisualizer
@@ -31,6 +30,10 @@ public class MapVisualizer
                 return "E";
             else if (found[0].GetType() == typeof(Orc))
                 return "O";
+            else if (found[0].GetType() == typeof(Animals))
+                return "A";
+            else if (found[0].GetType() == typeof(Birds))
+                return "B";
         }
         return " ";
 
@@ -74,7 +77,6 @@ public class MapVisualizer
             }
 
         }
-      
      
         Console.Write(Box.BottomLeft);
         for (int i = 0; i < _map.SizeX - 1; i++)
