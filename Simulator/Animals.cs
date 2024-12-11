@@ -12,6 +12,7 @@ namespace Simulator;
 public class Animals : IMappable            
 {
     //public override char Symbol => 'A';
+    public virtual string Symbol { get { return "A"; } }
 
     private string description = "Unknown";
     public required string Description                                  

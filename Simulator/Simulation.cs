@@ -118,8 +118,6 @@ public class Simulation
 
         CurrentMappable.Go(DirectionParser.Parse(CurrentMoveName).First());
 
-        //Console.WriteLine($"{CurrentMappable.ToString()} is at..."); // {CurrentMappable.Position}");
-        //Console.WriteLine(DirectionParser.Parse(CurrentMoveName).First());
         mappableIndex++;
         movesIndex++;
         turnCount++;

@@ -15,6 +15,8 @@ public abstract class Creature : IMappable                       //uwaga dodalam
     public Map? Map { get; private set; }
     public Point Position { get; private set; }
 
+    public abstract string Symbol { get; }
+
     public void InitMapAndPosition(Map map, Point position)           //wybranie mapy dla stwora i ustawienie pozycji
     {
         if (Map != null)
@@ -98,6 +100,7 @@ public abstract class Creature : IMappable                       //uwaga dodalam
 
     public void Go(Direction directions)
     {
+        /*
         if (Map != null)
         {
             Point newPosition = Map.Next(Position, directions);
@@ -109,6 +112,12 @@ public abstract class Creature : IMappable                       //uwaga dodalam
         }
         else
             throw new ArgumentNullException("Select a map");
+        */ 
+        directions.ToString().ToLower();
+        var newPosition = Map.Next(Position, directions);
+        Map.Move(this, Position, newPosition);
+        Position = newPosition;
+
     }
 
     //public string[] Go(string expr) => Go(DirectionParser.Parse(expr));

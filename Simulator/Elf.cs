@@ -17,6 +17,8 @@ public class Elf : Creature
         set => agility = Validator.Limiter(value, 0, 10);
     }
 
+    public override string Symbol { get { return "E"; } }
+
     public Elf() : base() { }
 
     public Elf(string name, int level = 1, int agility = 1) : base(name, level)

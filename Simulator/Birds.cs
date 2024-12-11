@@ -12,7 +12,7 @@ public class Birds : Animals
 {
     public bool CanFly { get; set; } = true;
 
-    //public override char Symbol => CanFly ? 'B' : 'b';
+    public override string Symbol => CanFly ? "B" : "b";
 
     public override string Info               // wlasciwosc do odczytu 
     {
@@ -23,14 +23,14 @@ public class Birds : Animals
     {
         if (Map != null)
         {
-            if (CanFly == false)
+            if (CanFly == false)                                      //jesli nie lata to idzie na skos..
             {
                 Point newPosition = Map.NextDiagonal(Position, direction);       //directions
                 Map.Move(this, Position, newPosition);                 // + ,direction
 
                 Position = newPosition;
             }
-            else if (CanFly == true)
+            else if (CanFly == true)                                  //jesli ptaczor umie latac to lata na 2 super
             {
                 Point newPosition = Map.Next(Position, direction);       //directions
                 Point newBirdPosition = Map.Next(newPosition, direction);   

@@ -23,9 +23,9 @@ public class Orc : Creature
 
         if (hunt_count % 2 == 0 && hunt_count != 0 && rage < 10)
             rage++;
-
-       // Console.WriteLine($"{Name} is hunting.");
     }
+
+    public override string Symbol { get { return "O"; } }
     public Orc() : base() { }          //    -pusty konstruktor bezparametrowy                                
 
     public Orc(string name, int level = 1, int rage = 1) : base(name, level)       // po doklejeniu tego konstruktora "znika" bezparametrowy domyslny, dziedziczony z klasy bazowej

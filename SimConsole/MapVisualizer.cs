@@ -26,6 +26,7 @@ public class MapVisualizer
 
             if (found.Count > 1)
                 return "X";
+            /*
             else if (found[0].GetType() == typeof(Elf))
                 return "E";
             else if (found[0].GetType() == typeof(Orc))
@@ -33,7 +34,9 @@ public class MapVisualizer
             else if (found[0].GetType() == typeof(Animals))
                 return "A";
             else if (found[0].GetType() == typeof(Birds))
-                return "B";
+                return "B";*/
+            else
+                return found[0].Symbol.ToString();
         }
         return " ";
 
